@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script> 
+<py-script>
+print('Dython version 3-web (Compiled 07.30.2022) (Originalally compiled 07.27.2022)')
+print('Type \'help\' for help.')
+variables = []
+while True:
+    try:
+        a = input('>>> ')
+        a = a.split(' ')
+    except Exception as e:
+        print('A Dython Runtime error has occured and Dython 3 has crashed.')
+        a = ['']
+    if a[0] == 'exit':
+        exit()
+    elif a[0] == 'print':
+        args = ''
+        for e in a:
+            if e != a[0]:
+                args += e + ' '
+        print(args)
+    elif a[0] == 'var':
+        if a[1] == 'create':
+            if a[3] == 'list':
+                variables.append({'name':a[2],'type':a[3],'value':[]})
+            if a[3] == 'string':
+                variables.append({'name':a[2],'type':a[3],'value':''})
+            if a[3] == 'int':
+                variables.append({'name':a[2],'type':a[3],'value':0})
+            print('ID is: ' + str(len(variables) - 1))
+        if a[1] == 'get':
+            print(variables[int(a[2])]['name'] + ': ' + str(variables[int(a[2])]['value']))
+        if a[1] == 'get_raw':
+            print(str(variables[int(a[2])]['value']))
+        if a[1] == 'set':
+            if variables[int(a[2])]['type'] == 'list':
+                variables[int(a[2])]['value'].append(a[3])
+            if variables[int(a[2])]['type'] == 'string':
+                variables[int(a[2])]['value'] += a[3]
+            if variables[int(a[2])]['type'] == 'int':
+                variables[int(a[2])]['value'] = int(a[3])
+        if a[1] == 'get_all':
+            for e in variables:
+                print(e['name'] + ': ' + str(e['value']))
+    elif a[0] == 'add':
+        variables.append({'name':'AdditionOutput','type':'int','value':int(a[1]) + int(a[2])})
+    elif a[0] == 'subt':
+        variables.append({'name':'SubtractionOutput','type':'int','value':int(a[1]) - int(a[2])})
+    elif a[0] == 'mult':
+        variables.append({'name':'MultiplicationOutput','type':'int','value':int(a[1]) * int(a[2])})
+    elif a[0] == 'div':
+        variables.append({'name':'DivisionOutput','type':'int','value':int(a[1]) / int(a[2])})
+    elif a[0] == 'add_var':
+        variables.append({'name':'AdditionOutput','type':'int','value':int(variables[int(a[1])]['value']) + int(variables[int(a[2])]['value'])})
+    elif a[0] == 'subt_var':
+        variables.append({'name':'SubtractionOutput','type':'int','value':int(variables[int(a[1])]['value']) - int(variables[int(a[2])]['value'])})
+    elif a[0] == 'mult_var':
+        variables.append({'name':'MultiplicationOutput','type':'int','value':int(variables[int(a[1])]['value']) * int(variables[int(a[2])]['value'])})
+    elif a[0] == 'div_var':
+        variables.append({'name':'DivisionOutput','type':'int','value':int(variables[int(a[1])]['value']) / int(variables[int(a[2])]['value'])})
+    else:
+        print('Dont know that function.')
+</py-script>
